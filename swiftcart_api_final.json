@@ -1,0 +1,258 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swiftcart API",
+    "version": "1.0.0",
+    "description": "API specification for use in APIdog for testing purposes"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/api/products": {
+      "get": {
+        "summary": "List and search for products",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of products"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login and receive a token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful, token returned"
+          },
+          "401": {
+            "description": "Invalid email"
+          },
+          "500": {
+            "description": "Login failed due to server error"
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "Get user info (requires auth)",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User information successfully retrieved"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Server error while retrieving user"
+          }
+        }
+      }
+    },
+    "/api/cart": {
+      "post": {
+        "summary": "Add item to cart",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "integer"
+                  },
+                  "quantity": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "product_id",
+                  "quantity"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Product successfully added to cart"
+          },
+          "400": {
+            "description": "Missing product ID or quantity, or product already exists in cart"
+          },
+          "404": {
+            "description": "Product not found"
+          },
+          "500": {
+            "description": "Server error while adding product to cart"
+          }
+        }
+      }
+    },
+    "/api/cart/{product_id}": {
+      "delete": {
+        "summary": "Remove product from cart",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cart item removed successfully"
+          },
+          "400": {
+            "description": "Invalid product ID format"
+          },
+          "404": {
+            "description": "Cart not found for user or item not in cart"
+          },
+          "500": {
+            "description": "Server error while removing product from cart"
+          }
+        }
+      }
+    },
+    "/api/orders/checkout": {
+      "post": {
+        "summary": "Checkout cart",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shipping_address": {
+                    "type": "string"
+                  },
+                  "payment_method": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "shipping_address",
+                  "payment_method"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Checkout successful, order created"
+          },
+          "400": {
+            "description": "Missing shipping address/payment method or cart is empty"
+          },
+          "404": {
+            "description": "Product in cart not found during checkout"
+          },
+          "500": {
+            "description": "Server error during checkout process"
+          }
+        }
+      }
+    }
+  }
+}

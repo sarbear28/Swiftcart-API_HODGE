@@ -4,7 +4,7 @@ const db = require('../models');
 const authenticateJWT = require('../middleware/jwtMiddleware');
 
 const { Order, OrderItem, CartItem, Product, Cart } = db;
-
+//checkout an order
 router.post('/checkout', authenticateJWT, async (req, res) => {
   
     const { user_id } = req.user;

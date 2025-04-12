@@ -4,17 +4,22 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+require('dotenv').config();
+
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config')[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// setup database environment 
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+  logging: false,
+});
 
 // Load all models
 db.User = require('./User')(sequelize, Sequelize.DataTypes);
@@ -26,7 +31,7 @@ db.Order = require('./Order')(sequelize, Sequelize.DataTypes);
 db.OrderItem = require('./OrderItems')(sequelize, Sequelize.DataTypes);
 
 // Apply associations
-Object.keys(db).forEach(modelName => {
+Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
