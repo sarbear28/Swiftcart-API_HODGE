@@ -16,8 +16,6 @@ A RESTful API for an e-commerce platform built with Node.js, Sequelize, and Post
 ## 📦 How to Clone and Run
 
 
-### 1. Clone the repo
-
 ```bash
 git clone https://github.com/sarbear28/Swiftcart-API_HODGE.git
 cd Swiftcart-API_HODGE
