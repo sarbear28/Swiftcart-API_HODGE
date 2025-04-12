@@ -1,0 +1,50 @@
+### List Products
+GET http://localhost:3000/api/products
+
+
+### Search Products by name
+GET http://localhost:3000/api/products?search=blender
+
+
+### filtering products by category
+GET http://localhost:3000/api/products?category_id=3
+
+### filtering products by price range
+GET http://localhost:3000/api/products?min_price=10&max_price=100
+
+### Login and get token
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test3@example.com"
+}
+
+### Access the protected route to get user info
+GET http://localhost:3000/api/users
+Authorization: Bearer 
+
+### Add item to the cart
+POST http://localhost:3000/api/cart
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "product_id": 80,
+  "quantity": 1
+}
+
+### Remove product from cart by product_id
+DELETE http://localhost:3000/api/cart/80
+Authorization: Bearer 
+
+### Checkout Cart
+POST http://localhost:3000/api/orders/checkout
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "shipping_address": "123 Toronto St. Hamilton ON",
+  "payment_method": "Credit"
+}
+
