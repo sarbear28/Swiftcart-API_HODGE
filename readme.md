@@ -1,38 +1,46 @@
-Swiftcart API
+🛒 Swiftcart API
+A RESTful API for an e-commerce platform built with Node.js, Express, Sequelize, and PostgreSQL (Neon). This project enables users to browse products, manage their shopping cart, and process orders securely using JWT-based authentication.
+⚙️ Prerequisites
+Before you begin, make sure you have the following installed:
 
-Description: A RESTful API for an e-commerce platform built with Node.js, Express, Sequelize, and PostgreSQL (Neon). This project allows users to browse products, manage their shopping cart, and process orders securely using JWT authentication.
+Node.js v14 or higher → Download Node.js
 
-Note: Before you being ensure you have Node.js v14 or higher installed, REST Client extension (for testing)
+Visual Studio Code
 
-Getting Started
-Follow these steps to run the project on your machine:
+REST Client extension (for testing the API)
 
-📁 Project Setup Instructions (Local)
+🚀 Getting Started
+📁 1. Download the Project Folder
+Access the folder via the OneDrive link shared in the submission box.
 
-1. Download the Project Folder
-Download the folder from the shared OneDrive link shared via submission box.
-Extract it to a local directory of your choice
+Extract it to a local directory of your choice.
 
+📦 2. Install Project Dependencies
+Open the extracted folder in Visual Studio Code. Then, in the integrated terminal, run:
 
-2. Install Dependencies
-Once inside the project directory, install the necessary dependencies:
-
+bash
+Copy
+Edit
 npm install
+This will install all required packages listed in package.json.
 
-This will install all the required packages listed in the package.json file.
+🖥️ 3. Run the Server Locally
+Start the API by running:
 
-3. Running the Project Locally
-To start the project locally, in Visual Studio Code use the following command:
-
+bash
+Copy
+Edit
 node index.js
+The server should now be running locally on http://localhost:3000 (or the configured port).
 
-This will start the server.
+🧪 4. Test the API with REST Client
+To test endpoints in VS Code:
 
-4. Test the API with REST Client in VS Code
-Open the project in Visual Studio Code
+Make sure the REST Client extension is installed
+→ Install REST Client
 
-Install the REST Client extension:
-REST Client Extension
+Open the swiftcart.rest file in the root of the project
 
-Open the swiftcart.rest file and test the pre-existing swiftcart endpoints.
+Click "Send Request" next to any of the included endpoints to test the API
 
+Let me know if you want to include setup notes for .env, PostgreSQL config on Neon, or the Sequelize models!
