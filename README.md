@@ -21,26 +21,26 @@ A RESTful API for an e-commerce platform built with Node.js, Sequelize, and Post
 git clone https://github.com/sarbear28/Swiftcart-API_HODGE.git
 cd Swiftcart-API_HODGE
 
-### **2. Add Your .env File**
+### 2. Add your .env file
 Create a .env file with the following content: 
 
 DATABASE_URL=postgresql://<username>:<password>@<your-neon-host>/<dbname>?sslmode=require
 PORT=3000
 JWT_SECRET=your_secret_key
 
-### 3. Build and Run the App in Docker
+### 3. Build and run the app in Docker
 docker-compose up --build
 the app will be accesible at http://localhost:3000
 
-## API TESTING
+## API Testing
 Import the switftcart_api_final.json file into APIDog or Postman to test the API endpoints
 
-## Files Included
+## Files included
 1. Dockerfile = for containerizing the Node.js app
 2. docker-compose.yaml - for running the app locally
 3. switftcart_api_final.json - for testing the API endpoints
 
-Notes:
+## Notes
 - .env has been excldued from the repo for security
 the app uses process.env.DATABASE_URL directly in Sequelize setup
 
